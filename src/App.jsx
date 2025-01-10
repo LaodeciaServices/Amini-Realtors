@@ -58,7 +58,7 @@ const App = () => {
         </div>
         {/* Conditionally render the menu on small screens */}
         {isMenuOpen && (
-          <nav className="top-0 left-0 fixed w-1/2 h-3/4 bg-green-600 border rounded-lg text-white z-50">
+          <nav className="top-0 left-0 fixed w-3/4 h-3/4 bg-green-600 border rounded-lg text-white z-50">
 
           
           <ul className="flex flex-col items-center">
