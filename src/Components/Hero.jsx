@@ -1,34 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { GrMoney } from "react-icons/gr";
+import { GiNextButton } from "react-icons/gi";
+import { MdAddHomeWork } from "react-icons/md";
+import { FaShopify } from "react-icons/fa";
 
 const Hero = () => {
-  const cardData = [
-    {
-      title: "Expert Realtors",
-      description: "Our experienced team ensures you find the perfect property tailored to your needs.",
-    },
-    {
-      title: "Seamless Process",
-      description: "Enjoy a stress-free journey with our transparent and efficient services.",
-    },
-    {
-      title: "Global Reach",
-      description: "Whether local or abroad, we connect buyers with properties across Kenya.",
-    },
-    {
-      title: "Customer-Centric",
-      description: "Your satisfaction is our priority, ensuring peace of mind every step of the way.",
-    },
-  ];
-
+ 
   return (
     <div className="mt-10 md:pt-20 ">
       {/* Hero Section */}
-      <div className="flex flex-col md:flex-row justify-between items-center px-6">
+      <div className="flex flex-col ">
         {/* Left Section */}
-        <div className="flex-1 p-6">
-          <h1 className="text-4xl font-bold text-blue-600 mb-4">Find Your Dream Home</h1>
-          <p className="text-gray-600 leading-relaxed mb-6">
+        <div className="">
+          <h1 className="text-4xl font-bold text-green-600 mb-4 mx-auto w-3/4 mt-5">Find Your Dream Home</h1>
+          <p className="text-gray-600 leading-relaxed mx-auto w-3/4 mb-6">
             Whether you're a Kenyan citizen living abroad or locally, Amini Properties is here to help you secure your dream home or commercial property.
             <br />
             <br />
@@ -41,39 +27,15 @@ const Hero = () => {
         </div>
 
         {/* Right Section */}
-        <div className="flex-1">
+        <div className="">
           <img
-            className="  rounded-lg shadow-lg"
-            src="https://images.pexels.com/photos/1438832/pexels-photo-1438832.jpeg?auto=compress&cs=tinysrgb&w=600"
+            className="w-full h-auto md:h-1/3 shadow-lg mt-7"
+            src="https://images.pexels.com/photos/7578931/pexels-photo-7578931.jpeg?"
             alt="Real estate"
           />
         </div>
       </div>
-
-      {/* Cards Section */}
-      <div className="py-12 bg-gray-100 mt-10">
-        <h2 className="text-3xl font-bold text-center text-blue-600 mb-8">
-          Why Amini Properties is the Real Deal
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-6">
-          {cardData.map((card, index) => (
-            <div
-              key={index}
-              className="relative bg-white p-6 shadow-lg rounded-lg border border-gray-200"
-            >
-              {/* Pin design */}
-              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-blue-500 rounded-full shadow-lg">
-                <div className="w-3 h-3 bg-white rounded-full m-auto mt-1.5"></div>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-700 mb-4">
-                {card.title}
-              </h3>
-              <p className="text-gray-600">{card.description}</p>
-            </div>
-          ))}
-        </div>
-
-       
+     
         <div className="flex justify-center">
   <Link to='/login'>
    <button
@@ -87,7 +49,8 @@ const Hero = () => {
 
 
       </div>
-    </div>
+    
+    
   );
 };
 
