@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
-  const [isLogin, setIsLogin] = useState(true); // Initial state is Login
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     firstName: '',
     lastName: '',
     email: '',
     password: '',
-    confirmPassword: '',
-  });
+    confirmPassword: '', // Only needed for register form
+  };
+
+  const [isLogin, setIsLogin] = useState(true); // Initial state is Login
+  const [formData, setFormData] = useState(initialFormData);
 
   const handleToggle = () => {
     setIsLogin((prevState) => !prevState); // Toggle between Login and Register
@@ -17,14 +19,17 @@ const Login = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prevData) => {
+      const updatedData = { ...prevData, [name]: value };
+      console.log('Form Data Updated:', updatedData); // Log the updated form data
+      return updatedData; // Return the updated state
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent page reload
+    console.log('Form Submitted:', formData); // Log form data when submitted
+
     if (isLogin) {
       console.log('Login form submitted:', formData); // Log login form data
       // Add login logic here (e.g., API call to authenticate)
@@ -32,6 +37,9 @@ const Login = () => {
       console.log('Register form submitted:', formData); // Log register form data
       // Add registration logic here (e.g., API call to create a new user)
     }
+
+    // Reset form fields after submission
+    setFormData(initialFormData); // Reset the form data to initial values
   };
 
   return (
@@ -53,7 +61,7 @@ const Login = () => {
                     name="email"
                     className="w-full p-2 border rounded"
                     placeholder="Enter your email"
-                    value={formData.email}
+                    value={formData.email} // Bind value to formData
                     onChange={handleChange}
                   />
                 </label>
@@ -64,7 +72,7 @@ const Login = () => {
                     name="password"
                     className="w-full p-2 border rounded"
                     placeholder="Enter your password"
-                    value={formData.password}
+                    value={formData.password} // Bind value to formData
                     onChange={handleChange}
                   />
                 </label>
@@ -82,7 +90,7 @@ const Login = () => {
                     name="firstName"
                     className="w-full p-2 border rounded"
                     placeholder="Enter your first name"
-                    value={formData.firstName}
+                    value={formData.firstName} // Bind value to formData
                     onChange={handleChange}
                   />
                 </label>
@@ -93,7 +101,7 @@ const Login = () => {
                     name="lastName"
                     className="w-full p-2 border rounded"
                     placeholder="Enter your last name"
-                    value={formData.lastName}
+                    value={formData.lastName} // Bind value to formData
                     onChange={handleChange}
                   />
                 </label>
@@ -104,7 +112,7 @@ const Login = () => {
                     name="email"
                     className="w-full p-2 border rounded"
                     placeholder="Enter your email"
-                    value={formData.email}
+                    value={formData.email} // Bind value to formData
                     onChange={handleChange}
                   />
                 </label>
@@ -115,7 +123,7 @@ const Login = () => {
                     name="password"
                     className="w-full p-2 border rounded"
                     placeholder="Enter your password"
-                    value={formData.password}
+                    value={formData.password} // Bind value to formData
                     onChange={handleChange}
                   />
                 </label>
@@ -126,7 +134,7 @@ const Login = () => {
                     name="confirmPassword"
                     className="w-full p-2 border rounded"
                     placeholder="Confirm your password"
-                    value={formData.confirmPassword}
+                    value={formData.confirmPassword} // Bind value to formData
                     onChange={handleChange}
                   />
                 </label>

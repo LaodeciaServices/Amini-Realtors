@@ -35,18 +35,12 @@ const Hero = () => {
           />
         </div>
       </div>
-     
-        <div className="flex justify-center">
-  <Link to='/login'>
-   <button
-    className="px-6 py-3 mt-7 mb-7 flex items-center bg-blue-500 text-white rounded-lg shadow-lg
-    hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 ease-in-out"
-  >
-    Get Started
-  </button>
-  </Link>
-</div>
-
+        <Link to='/about'>
+        <div className='text-center mt-7' >
+          <button className='bg-green-400 hover:bg-green-600 rounded-lg shadow-lg
+           p-5 text-white capitalize font-bold'>Learn about us</button>
+        </div>
+        </Link>
 
       </div>
     
