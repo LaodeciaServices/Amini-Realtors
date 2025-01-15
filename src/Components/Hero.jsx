@@ -11,7 +11,7 @@ const Hero = () => {
     <div className="mt-10 md:pt-20 ">
       {/* Hero Section */}
       <div className="flex flex-col ">
-        {/* Left Section */}
+        
         <div className="">
           <h1 className="text-4xl font-bold text-green-600 mb-4 mx-auto w-3/4 mt-5">Find Your Dream Home</h1>
           <p className="text-gray-600 leading-relaxed mx-auto w-3/4 mb-6">

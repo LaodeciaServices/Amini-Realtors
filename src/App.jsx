@@ -2,6 +2,9 @@ import { useState } from 'react'
 import { BrowserRouter,Routes,Route,Link } from 'react-router-dom';
 import { FaFacebookSquare, FaTwitter, FaInstagram } from 'react-icons/fa'; 
 
+
+
+
 import { ImMenu } from 'react-icons/im';
 import Hero from './Components/Hero';
 import Login from './Components/Login';
@@ -76,16 +79,12 @@ const App = () => {
     </Link>
 
     
-    <li onClick={() => setIsMenuOpen(false)} 
-    className="py-3 text-2xl hover:text-red-600">
-       Services
-    </li>
-     
+    
 
-    <Link to='/contact'>
+    <Link to='/login'>
     <li onClick={() => setIsMenuOpen(false)} 
     className="py-3 text-2xl hover:text-red-600">
-       Contact us
+       Sign In
     </li>
     </Link>
 
@@ -112,16 +111,12 @@ font-sans  w-full bg-white'>
         About us
       </li>
       </Link>
-      <Link to='services'>
-      <li className="inline-block px-3 text-xl font-bold border-b-4 border-transparent hover:border-emerald-400" >
-        Services
+      <Link to='login'>
+      <li className="inline-block capitalize px-3 text-xl font-bold border-b-4 border-transparent hover:border-emerald-400" >
+        Sign In
       </li>
       </Link>
-      <Link to='contact'>
-      <li className="inline-block px-3 text-xl font-bold border-b-4 border-transparent hover:border-emerald-400" >
-        Contact us
-      </li>
-      </Link>
+     
     </ul>
   </div>
 </header>
