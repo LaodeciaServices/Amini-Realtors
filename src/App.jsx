@@ -52,7 +52,7 @@ const App = () => {
       {/* Header for smaller screens */}
       <header className=' fixed top-0 w-full block lg:hidden md:hidden  bg-white z-50  mb-15'>
         <div className='flex flex-row items-center justify-around text-2xl '>
-          <h1 className='font-raleway font-extrabold text-xl mt-4 mb-4 text-black'>Amini <span className='text-emerald-400'>Realtors</span></h1>
+          <h1 className='font-raleway font-extrabold text-xl mt-4 mb-4 text-gray-600'>Amini <span className='text-emerald-400'>Realtors</span></h1>
         
           <ImMenu
             className='block lg:hidden md:hidden text-emerald-800 mt-2 mb-4 cursor-pointer'
@@ -99,7 +99,7 @@ const App = () => {
       <header className=' header fixed top-0 left-0 hidden md:block lg:block p-4 z-50 mb-15
 font-sans  w-full bg-white'> 
   <div className='flex justify-around items-center text-2xl mt-4 '>
-    <h1 className='font-raleway font-extrabold text-3xl mb-4 text-black'>Amini <span className='text-emerald-400'>Realtors</span></h1>
+    <h1 className='font-raleway font-extrabold text-3xl mb-4 text-gray-600'>Amini <span className='text-emerald-400'>Realtors</span></h1>
     <ul className="flex mb-4">
       <Link to='/'>
     <li className="inline-block px-3 text-xl font-bold border-b-4 border-transparent hover:border-emerald-400">

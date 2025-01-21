@@ -1,7 +1,14 @@
 import React, {useState} from 'react'
 import { FaPhoneAlt, FaEnvelope } from 'react-icons/fa'; 
+import CountUp from 'react-countup';
+import {useInView} from  "react-intersection-observer";
 
 const About = () => {
+
+  const [ref, inView] = useInView({
+    triggerOnce: true, // Count up only once
+    threshold: 0.5,   // Start counting when 50% of the element is in view
+  });
 
 
     const [formData, setFormData] = useState({
@@ -34,14 +41,24 @@ const About = () => {
         
         {/* Left Section - Introduction */}
         <div>
-          <h1 className="text-3xl font-bold text-green-600 mb-4 mx-auto w-3/4 mt-5">Building Trust, One Home At A Time</h1>
-          <p className="text-gray-600 leading-relaxed mx-auto w-3/4 mb-6">
-            At Amini, we help Kenyans in the diaspora purchase their dream properties by connecting
-            them with trusted professionals. <br /><br />
-            Whether you’re looking for a commercial space, a country home, or land, we offer personalized service for a seamless buying experience.  
-            Your satisfaction is our top priority—start your journey to owning your dream home today!
-          </p>
-        </div>
+  <h1 className="text-3xl capitalize font-bold text-gray-600 mb-4 mx-auto w-3/4 mt-5">
+  Helping you own property_<br/><br/>anywhere!
+  </h1>
+  <p className="text-gray-600 leading-relaxed mx-auto w-3/4 mb-6">
+  At Amini, we believe in making property ownership and development in 
+  Kenya accessible to everyone, especially our Kenyan diaspora community.<br/>
+ With years of experience, we've created a reliable and professional 
+  platform that offers personalized services to help you buy, build,
+  or manage properties in Kenya with ease.<br/><br/>We’ve removed the traditional 
+  barriers of relying on friends or family, ensuring a secure and seamless process.
+   Whether you’re looking to invest in land, build your dream home, or manage your
+    properties, Amini is here to help you every step of the way. Our mission is 
+    to bridge the gap and make property ownership a reality for all Kenyans, no matter where you are in the world.
+</p>
+
+
+</div>
+
 
         {/* Right Section - Image */}
         <div>
@@ -124,11 +141,11 @@ const About = () => {
 </div>
     
 
-<div className="container mx-auto p-9 mt-10 mb-12">
+<div className="container mx-auto p-12 mt-10 mb-12">
       <h2 className="text-3xl font-bold text-center text-green-600 mb-6">Contact Us</h2>
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto">
-        <div className="mb-4">
-          <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
+      <form onSubmit={handleSubmit} className="bg-white p-9 rounded-lg shadow-lg max-w-lg mx-auto">
+        <div className="mb-4 ">
+          <label htmlFor="name" className="block  text-gray-700 font-medium mb-2">
             Name
           </label>
           <input
@@ -197,6 +214,38 @@ const About = () => {
   </a>
 </p>
 </div>
+
+
+<div ref={ref} className="stats-section md:flex justify-center gap-7 mx-auto w-3/4 mt-20 mb-20">
+  <div className="stat-item text-center">
+    <h3 className="text-6xl md:text-8xl text-green-500 font-bold">
+      
+    {inView && <CountUp start={0} end={150} duration={3} />}
+
+    </h3>
+    <p className="text-lg  font-bold mt-2">Happy Clients</p>
+  </div>
+  <div className="stat-item text-center">
+    <h3 className="text-6xl md:text-8xl text-green-500 font-bold">
+
+      
+      {inView && <CountUp start={0} end={300} duration={3} />}
+
+    </h3>
+    <p className="text-lg font-bold mt-2">Projects Completed</p>
+  </div>
+  <div className="stat-item text-center">
+    <h3 className=" text-6xl md:text-8xl text-green-500 font-bold">
+
+    {inView && <CountUp start={0} end={25} duration={3} />}
+      
+    </h3>
+    <p className="text-lg font-bold mt-2">Years of Experience</p>
+  </div>
+</div>
+
+
+
     </div>
   )
 }

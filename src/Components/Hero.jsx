@@ -13,16 +13,16 @@ const Hero = () => {
       <div className="flex flex-col ">
         
         <div className="">
-          <h1 className="text-4xl font-bold text-green-600 mb-4 mx-auto w-3/4 mt-5">Find Your Dream Home</h1>
+          <h1 className="text-3xl font-bold text-gray-600  mx-auto w-3/4 mb-5 mt-5">
+          Your Kenyan Home Awaits-<br/><br/>Karibu</h1>
           <p className="text-gray-600 leading-relaxed mx-auto w-3/4 mb-6">
-            Whether you're a Kenyan citizen living abroad or locally, Amini Properties is here to help you secure your dream home or commercial property.
-            <br />
-            <br />
-            We connect realtors and buyers for a seamless, stress-free experience, ensuring peace of mind every step of the way.
-            <br />
-            <br />
-            Let us be the bridge to your property goals.
-          </p>
+          <span className='text-emerald-400 font-bold'>Amini Usiamini</span> – Believe it or not! For the first time, we’ve risen to the occasion to
+   create a platform that makes owning or developing property in Kenya simple, 
+   seamless, and stress-free for our diaspora family.<br/><br/> No more relying on friends 
+   or family as trustees. With Amini Property Managers and Developers, professionals
+    are ready to handle your real estate needs—whether it’s buying land, building your 
+    dream home, or managing your property—anywhere in the country. Your property journey starts now!
+</p>
          
         </div>
 
