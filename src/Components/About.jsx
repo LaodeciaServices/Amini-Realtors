@@ -42,7 +42,7 @@ const About = () => {
         {/* Left Section - Introduction */}
         <div>
   <h1 className="text-3xl capitalize font-bold text-gray-600 mb-4 mx-auto w-3/4 mt-5">
-  Helping you own property_<br/><br/>anywhere!
+  Helping you own property-<br/><br/>anywhere!
   </h1>
   <p className="text-gray-600 leading-relaxed mx-auto w-3/4 mb-6">
   At Amini, we believe in making property ownership and development in 
