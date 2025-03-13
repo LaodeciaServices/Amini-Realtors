@@ -1,87 +1,104 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+// import { supabase } from "../supabase";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { supabase } from "../supabaseClient";
 
 const Login = () => {
   const initialFormData = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '', // Only needed for register form
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    confirmPassword: "",
   };
 
-  const [isLogin, setIsLogin] = useState(true); // Initial state is Login
+  const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState(initialFormData);
+  const [loading, setLoading] = useState(false);
 
   const handleToggle = () => {
-    setIsLogin((prevState) => !prevState); // Toggle between Login and Register
+    setIsLogin((prevState) => !prevState);
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => {
-      const updatedData = { ...prevData, [name]: value };
-      console.log('Form Data Updated:', updatedData); // Log the updated form data
-      return updatedData; // Return the updated state
-    });
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent page reload
-    console.log('Form Submitted:', formData); // Log form data when submitted
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-    if (isLogin) {
-      console.log('Login form submitted:', formData); // Log login form data
-      // Add login logic here (e.g., API call to authenticate)
-    } else {
-      console.log('Register form submitted:', formData); // Log register form data
-      // Add registration logic here (e.g., API call to create a new user)
+    try {
+      if (isLogin) {
+        // LOGIN LOGIC
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: formData.email,
+          password: formData.password,
+        });
+
+        if (error) throw error;
+        toast.success("Login successful!");
+        // console.log("Logged in user:", user);
+        // Store user session in localStorage
+        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("session", JSON.stringify(data.session));
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 2000);
+      } else {
+        // REGISTER LOGIC
+        if (formData.password !== formData.confirmPassword) {
+          toast.error("Passwords do not match");
+          return;
+        }
+
+        const { data, error } = await supabase.auth.signUp({
+          email: formData.email,
+          password: formData.password,
+          options: {
+            data: {
+              firstName: formData.firstName,
+              lastName: formData.lastName,
+            },
+          },
+        });
+
+        if (error) throw error;
+        toast.success(
+          "Registration successful! Check your email for verification."
+        );
+        // console.log("Registered user:", user);
+        // Store user session in localStorage
+        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("session", JSON.stringify(data.session));
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 2000);
+      }
+
+      // setFormData(initialFormData);
+    } catch (error) {
+      toast.error(error.message);
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
-
-    // Reset form fields after submission
-    setFormData(initialFormData); // Reset the form data to initial values
   };
 
   return (
-    <div className='mt-24'>
+    <div className="mt-24">
+      <ToastContainer position="top-right" autoClose={3000} />
       <div className="container mx-auto p-8">
-        <div className="form-container max-w-md mx-auto bg-white p-6 rounded-lg shadow-2xl">
+        <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-2xl">
           <h2 className="text-center text-2xl font-bold mb-4">
-            {isLogin ? 'Login' : 'Register'} {/* Switch the form header */}
+            {isLogin ? "Login" : "Register"}
           </h2>
 
-          <form onSubmit={handleSubmit}> {/* Add onSubmit to handle form submission */}
-            {isLogin ? (
-              // Login Form
-              <>
-                <label className="block mb-2">
-                  Email:
-                  <input
-                    type="email"
-                    name="email"
-                    className="w-full p-2 border rounded"
-                    placeholder="Enter your email"
-                    value={formData.email} // Bind value to formData
-                    onChange={handleChange}
-                  />
-                </label>
-                <label className="block mb-4">
-                  Password:
-                  <input
-                    type="password"
-                    name="password"
-                    className="w-full p-2 border rounded"
-                    placeholder="Enter your password"
-                    value={formData.password} // Bind value to formData
-                    onChange={handleChange}
-                  />
-                </label>
-                <button type="submit" className="w-full p-2 bg-green-500 text-white rounded">
-                  Login
-                </button>
-              </>
-            ) : (
-              // Register Form
+          <form onSubmit={handleSubmit}>
+            {!isLogin && (
               <>
                 <label className="block mb-2">
                   First Name:
@@ -90,7 +107,7 @@ const Login = () => {
                     name="firstName"
                     className="w-full p-2 border rounded"
                     placeholder="Enter your first name"
-                    value={formData.firstName} // Bind value to formData
+                    value={formData.firstName}
                     onChange={handleChange}
                   />
                 </label>
@@ -101,57 +118,67 @@ const Login = () => {
                     name="lastName"
                     className="w-full p-2 border rounded"
                     placeholder="Enter your last name"
-                    value={formData.lastName} // Bind value to formData
+                    value={formData.lastName}
                     onChange={handleChange}
                   />
                 </label>
-                <label className="block mb-2">
-                  Email:
-                  <input
-                    type="email"
-                    name="email"
-                    className="w-full p-2 border rounded"
-                    placeholder="Enter your email"
-                    value={formData.email} // Bind value to formData
-                    onChange={handleChange}
-                  />
-                </label>
-                <label className="block mb-2">
-                  Password:
-                  <input
-                    type="password"
-                    name="password"
-                    className="w-full p-2 border rounded"
-                    placeholder="Enter your password"
-                    value={formData.password} // Bind value to formData
-                    onChange={handleChange}
-                  />
-                </label>
-                <label className="block mb-4">
-                  Confirm Password:
-                  <input
-                    type="password"
-                    name="confirmPassword"
-                    className="w-full p-2 border rounded"
-                    placeholder="Confirm your password"
-                    value={formData.confirmPassword} // Bind value to formData
-                    onChange={handleChange}
-                  />
-                </label>
-                <button type="submit" className="w-full p-2 bg-green-500 text-white rounded">
-                  Register
-                </button>
               </>
             )}
-          </form>
-
-          <div className="text-center mt-4">
+            <label className="block mb-2">
+              Email:
+              <input
+                type="email"
+                name="email"
+                className="w-full p-2 border rounded"
+                placeholder="Enter your email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </label>
+            <label className="block mb-2">
+              Password:
+              <input
+                type="password"
+                name="password"
+                className="w-full p-2 border rounded"
+                placeholder="Enter your password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+            </label>
+            {!isLogin && (
+              <label className="block mb-4">
+                Confirm Password:
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  className="w-full p-2 border rounded"
+                  placeholder="Confirm your password"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                />
+              </label>
+            )}
             <button
-              onClick={handleToggle}
-              className="text-green-500 underline"
+              type="submit"
+              className="w-full p-2 bg-green-500 text-white rounded"
+              disabled={loading}
             >
-              {isLogin ? "Don't have an account? Register" : "Already have an account? Login"}
+              {loading ? "Processing..." : isLogin ? "Login" : "Register"}
             </button>
+          </form>
+          {/* Login form */}
+          <div className="text-center mt-4">
+            <button onClick={handleToggle} className="text-green-500 underline">
+              {isLogin
+                ? "Don't have an account? Register"
+                : "Already have an account? Login"}
+            </button>
+          </div>
+          <div className="text-center mt-4">
+            <Link to="/reset-password" className="text-green-500 underline">
+              Forgot Password? Reset here
+            </Link>
           </div>
           <div className="text-center mt-4">
             <Link to="/" className="text-green-500 underline">
