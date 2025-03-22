@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { supabase } from "../supabaseClient";
+import { useDispatch, useSelector } from "react-redux";
+import { signInFailure, signInSuccess } from "../redux/user/userSlice";
 
 const Login = () => {
   const initialFormData = {
@@ -17,6 +19,8 @@ const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
+  const { error } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const handleToggle = () => {
     setIsLogin((prevState) => !prevState);
@@ -45,6 +49,7 @@ const Login = () => {
         // Store user session in localStorage
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("session", JSON.stringify(data.session));
+        dispatch(signInSuccess(data.user));
         setTimeout(() => {
           window.location.href = "/";
         }, 2000);
@@ -74,6 +79,7 @@ const Login = () => {
         // Store user session in localStorage
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("session", JSON.stringify(data.session));
+        dispatch(signInSuccess(data.user));
         setTimeout(() => {
           window.location.href = "/";
         }, 2000);
@@ -83,6 +89,7 @@ const Login = () => {
     } catch (error) {
       toast.error(error.message);
       console.error(error);
+      dispatch(signInFailure(error.message));
     } finally {
       setLoading(false);
     }
