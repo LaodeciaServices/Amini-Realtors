@@ -107,11 +107,17 @@ function Navbar() {
             </Link>
             {user ? (
               <>
+                <Link to="/create-listing">
+                  <li className="px-3 text-xl font-bold border-b-4 border-transparent hover:border-emerald-400 ">
+                    create-listing
+                  </li>
+                </Link>
                 <Link to="/profile">
                   <li className="px-3 text-xl font-bold border-b-4 border-transparent hover:border-emerald-400 capitalize">
                     {user?.user_metadata?.firstName || "User"}
                   </li>
                 </Link>
+
                 <button onClick={handleLogout} className="text-red-500">
                   <li className="px-3 text-xl font-bold border-b-4 border-transparent hover:border-red-400">
                     Log Out
